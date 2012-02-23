@@ -1,14 +1,19 @@
-  _____  ______          _____  __  __ ______ 
- |  __ \|  ____|   /\   |  __ \|  \/  |  ____|
- | |__) | |__     /  \  | |  | | \  / | |__   
- |  _  /|  __|   / /\ \ | |  | | |\/| |  __|  
- | | \ \| |____ / ____ \| |__| | |  | | |____ 
- |_|  \_\______/_/    \_\_____/|_|  |_|______|
-                                              
+README
+======
 
 Introduction
-============
+------------
 
 AFRO is Another Flac Ripping Ohohoh...
 
+Requirements
+------------
+
+Afro is designed to run on Python version 2 and depends on the following python modules:
+ - Mutagen: http://code.google.com/p/mutagen/
+ - PyYaml: http://pyyaml.org/
+
+It also need some external softwares:
+ - cdparanoia: http://xiph.org/paranoia/
+ - flac: http://flac.sourceforge.net/
 
