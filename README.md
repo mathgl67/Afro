@@ -20,3 +20,5 @@ It also need some external softwares:
  - cdparanoia: http://xiph.org/paranoia/
  - flac: http://flac.sourceforge.net/
 
+It's tested to be working on OSx and Linux.
+
