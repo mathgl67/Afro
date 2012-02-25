@@ -33,11 +33,11 @@ hasher:
         algorithm: 'sha512'  
 tools:
     ripper:
-        binary: '/opt/local/bin/cdparanoia'
+        binary: 'cdparanoia'
         format: '%(binary)s %(options)s %(tracknumber)d %(outfile)s'
         options: '-w -z'
     encoder:
-        binary: '/opt/local/bin/flac'
+        binary: 'flac'
         format: '%(binary)s %(options)s -o %(outfile)s %(infile)s'
         options: '--best --delete-input-file --force'
 
