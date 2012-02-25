@@ -22,7 +22,6 @@ import os
 import sys
 import argparse
 
-from afro.cmdline import CmdlineParser
 from afro.disc_info import disc_info, edit_info 
 from afro.formater import Formater
 from afro.hasher import Hasher
