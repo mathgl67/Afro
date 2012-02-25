@@ -4,7 +4,7 @@ README
 Introduction
 ------------
 
-AFRO is Another Flac Ripping Ohohoh...
+**AFRO** is **A**nother **F**lac **R**ipping **O**rchestra
 
 Requirements
 ------------
