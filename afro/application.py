@@ -56,7 +56,7 @@ class Application:
 
         # edit
         if args.edit:
-            disc = edit_info(disc)
+            disc = edit_info(disc, config)
 
         # prepare disc
         if args.genre:

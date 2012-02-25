@@ -32,6 +32,10 @@ hasher:
         extension: 'sha512sum'
         algorithm: 'sha512'  
 tools:
+    editor:
+        binary: 'nano'
+        format: '%(binary)s %(options)s %(file)s'
+        options: ''
     ripper:
         binary: 'cdparanoia'
         format: '%(binary)s %(options)s %(tracknumber)d %(outfile)s'

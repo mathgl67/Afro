@@ -53,13 +53,20 @@ def disc_info():
         })
     return result_list
 
-def edit_info(disc):
+def edit_info(disc, config):
     (file_fd, file_path) = tempfile.mkstemp() 
     file_obj = codecs.open(file_path, 'w', 'utf-8')
     json.dump(disc, file_obj, indent=2, sort_keys=True, ensure_ascii=False)
     file_obj.close()
 
-    subprocess.call(['vim', file_path]) 
+    editor = config['tools']['editor']
+    editor_options = {
+        'binary': editor['binary'],
+        'options': editor['options'],
+        'file': file_path,
+    }
+    cmd = editor['format'] % editor_options
+    subprocess.call(cmd.split()) 
 
     file_obj = codecs.open(file_path, 'r', 'utf-8')
     disc2 = json.load(file_obj)
