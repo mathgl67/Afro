@@ -55,6 +55,6 @@ def track_tag(infile, disc, track):
         t['album'] = disc['title']
         t['title'] = track['title']
         t['date'] = disc['date']
-        t['genre'] = 'none'
+        t['genre'] = disc['genre'] 
         t.save(infile);
 
