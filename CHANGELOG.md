@@ -1,5 +1,12 @@
-Version 0.2
------------
+Version 0.2.1
+-------------
+
+ * doc: basic usage (issue #5)
+ * fix: set genre tag (issue #4)
+ * fix: handle no cdrom exception
+
+Version 0.2.0
+-------------
  
  * doc: change the signification of the name
  * doc: add working OS
