@@ -18,6 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import sys
 import os
 import codecs
 import tempfile 
@@ -29,8 +30,13 @@ import musicbrainz2.webservice
 def disc_info():
     service = musicbrainz2.webservice.WebService()
     query = musicbrainz2.webservice.Query(service)
+    
+    try:
+        disc = musicbrainz2.disc.readDisc()
+    except musicbrainz2.disc.DiscError, e:
+        print e.message
+        sys.exit(1)
 
-    disc = musicbrainz2.disc.readDisc()
     filter = musicbrainz2.webservice.ReleaseFilter(discId=disc.getId())
     result_list = []
     for result in query.getReleases(filter):

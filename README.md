@@ -22,3 +22,10 @@ It also need some external softwares:
 
 It's tested to be working on OSx and Linux.
 
+Basic Usage
+-----------
+
+ 1. Show entries found in MusicBrainz's database for the inserted CD: `# python afro.py list`
+ 1. Get more informations for an entry: `# python afro.py info 1`
+ 1. Rip a CD using the informations from an entry: `# python afro.py rip 1`
+
