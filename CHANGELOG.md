@@ -1,3 +1,13 @@
+CHANGELOG
+=========
+
+Version 0.2.2
+-------------
+
+ * fix: the track length stored in the playlist is now defined by the value in the encoded file (issue #8)
+ * feature: add StripTransformer (issue #9)
+ * config: add few chars to the remplacement list
+
 Version 0.2.1
 -------------
 
