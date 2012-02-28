@@ -44,7 +44,7 @@ class M3U:
         file_obj.write(u'#EXTM3U\n')
         #tracks
         for file_name, track in self.tracks:
-            file_obj.write(u'#EXTINF:%d,%s\n' % (track['duration']/1000, track['title']))
+            file_obj.write(u'#EXTINF:%d,%s\n' % (track['duration_real'], track['title']))
             file_obj.write(u'%s\n' % file_name)
         #save
         file_obj.close()

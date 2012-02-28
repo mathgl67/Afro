@@ -44,6 +44,10 @@ def track_enc(infile, outfile, config):
     }
     return command_run(cmd, config)
 
+def track_length(infile):
+    audio = mutagen.flac.FLAC(infile)
+    return int(audio.info.length)
+
 def track_tag(infile, disc, track):
     tagger = []
     tagger.append(mutagen.easyid3.EasyID3())
