@@ -50,6 +50,9 @@ class RemoveListTransformer(AbstractTransformer):
             text = text.replace(remove, '')
         return text
 
+class StripTransformer(AbstractTransformer):
+    def transform(self, text):
+        return text.strip()
 
 class Formater:
     __class = {
@@ -58,6 +61,7 @@ class Formater:
         'lowercase': LowercaseTransformer,
         'replace_list': ReplaceListTransformer,
         'remove_list': RemoveListTransformer,
+        'strip': StripTransformer,
     }
 
     def __init__(self, config):
