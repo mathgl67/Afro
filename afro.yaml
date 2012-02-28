@@ -17,7 +17,7 @@ formater:
         transformer: ['lowercase', 'underscore', 'replace_list', 'remove_list']
 transformer:
     replace_list: {'é': 'e', 'è': 'e', 'ê': 'e', 'à': 'a', 'â': 'a', 'î': 'i',
-                   'ô': 'o', 'ù': 'u'}
+                   'ô': 'o', 'ù': 'u', 'í': 'i', '*': '_', '-': '_'}
     remove_list: ['!', '.', ',', '?']
 playlist:
     m3u:
