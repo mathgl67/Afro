@@ -26,7 +26,7 @@ from afro.disc_info import disc_info, edit_info
 from afro.formater import Formater
 from afro.hasher import Hasher
 from afro.playlist import M3U
-from afro.tracks import track_rip, track_enc, track_tag
+from afro.tracks import track_rip, track_enc, track_tag, track_length
 from afro.utils import config_read
 
 class Application:
@@ -101,6 +101,9 @@ class Application:
             #tags
             print 'tag:', track_name
             track_tag(track_flac, disc, track)
+    
+            #get the real track length
+            track['duration_real'] = track_length(track_flac)
        
             #perform hash on the file
             hasher.perform(u'%s.flac' % track_name)
