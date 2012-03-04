@@ -22,12 +22,12 @@ import os
 import sys
 import argparse
 
+from afro.config import Config
 from afro.disc_info import disc_info, edit_info 
 from afro.formater import Formater
 from afro.hasher import Hasher
 from afro.playlist import M3U
 from afro.tracks import track_rip, track_enc, track_tag, track_length
-from afro.utils import config_read
 
 class Application:
     def list(self, args):
@@ -48,7 +48,8 @@ class Application:
         
     def rip(self, args):
         # read config
-        config = config_read()
+        config = Config()
+        config.load()
 
         # read disc info
         di = disc_info()
