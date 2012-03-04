@@ -19,19 +19,12 @@
 #
 
 import codecs
-import yaml
 import subprocess
 
-def config_read():
-    conf_file = codecs.open(u'afro.yaml', 'r', 'utf-8')
-    conf_values = yaml.load(conf_file.read())
-    conf_file.close()
-    return conf_values
-
-def command_run(command, config):
+def command_run(command, logging):
     logger=None
-    if config['logging']['enable']:
-        logger = codecs.open(config['logging']['file'], 'w+', 'utf-8')
+    if logging['enable']:
+        logger = codecs.open(logging['file'], 'w+', 'utf-8')
         logger.write(u'command_run: %s\n' % (command))
     
     command_array = command.split(' ')

@@ -48,12 +48,20 @@ def disc_info():
                 'duration': track.getDuration(),
             })
 
+        release = result.release.getEarliestReleaseEvent()
+        if release:
+            date = release.date
+            country = release.country
+        else:
+            date = u'none'
+            country = u'none'
+
         result_list.append({
             'artist': result.release.artist.name,
             'title': result.release.title,
-            'date': result.release.getEarliestReleaseEvent().date,
+            'date':  date,
             'genre': 'none',
-            'country': result.release.getEarliestReleaseEvent().country,
+            'country': country,
             'tracks': track_list,
             
         })

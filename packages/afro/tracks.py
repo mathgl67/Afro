@@ -24,25 +24,23 @@ import mutagen.easyid3
 
 from afro.utils import command_run
 
-def track_rip(tracknumber, outfile, config):
-    ripper = config['tools']['ripper']
+def track_rip(tracknumber, outfile, ripper, logfile):
     cmd = ripper['format'] % {
         'binary': ripper['binary'],
         'options': ripper['options'],
         'tracknumber': tracknumber,
         'outfile': outfile,
     }
-    return command_run(cmd, config)
+    return command_run(cmd, logfile)
 
-def track_enc(infile, outfile, config):
-    encoder = config['tools']['encoder']
+def track_enc(infile, outfile, encoder, logfile):
     cmd = encoder['format'] % {
         'binary': encoder['binary'],
         'options': encoder['options'],
         'infile': infile,
         'outfile': outfile,
     }
-    return command_run(cmd, config)
+    return command_run(cmd, logfile)
 
 def track_length(infile):
     audio = mutagen.flac.FLAC(infile)

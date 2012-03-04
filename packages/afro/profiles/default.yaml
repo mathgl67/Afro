@@ -1,0 +1,34 @@
+# vim:set ts=4 sw=4 expandtab:
+formater:
+    folder:
+        format: '%(artist)s-%(album)s-%(date)s-FLAC'
+        transformer: ['capwords', 'underscore', 'replace_list', 'remove_list', 'strip']
+    metafiles:
+        format: '00-%(artist)s-%(album)s-%(date)s'
+        transformer: ['lowercase', 'underscore', 'replace_list', 'remove_list', 'strip']
+    track:
+        format: '%(tracknumber)02d-%(title)s'
+        transformer: ['lowercase', 'underscore', 'replace_list', 'remove_list', 'strip']
+transformer:
+    replace_list: {'é': 'e', 'è': 'e', 'ê': 'e', 'à': 'a', 'â': 'a', 'î': 'i',
+                   'ô': 'o', 'ó': 'o', 'ù': 'u', 'í': 'i', 'ï': 'i', '*': '_',
+                   '-': '_', ' / ': '-'}
+    remove_list: ['!', '.', ',', '?', ':']
+playlist:
+    m3u:
+        extension: 'm3u'
+        save_on_append: true
+hasher:
+    list: ['sfv', 'shasum']
+    save_on_perform: true
+    sfv:
+        extension: 'sfv'
+    shasum:
+        extension: 'sha512sum'
+        algorithm: 'sha512'  
+tools:
+    ripper:
+        binary: 'cdparanoia'
+        format: '%(binary)s %(options)s %(tracknumber)d %(outfile)s'
+        options: '-w -z'
+

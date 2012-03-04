@@ -28,12 +28,11 @@ except ImportError:
     from yaml import Loader as yamlLoader
 
 
-class Config(dict):
-    def load(self, filepath=None):
-        file_list = [
-            os.path.join(os.path.dirname(__file__), u'config.default.yaml'),
-            os.path.expanduser(os.path.join(u'~', u'.config', u'afro.yaml')),
-        ]
+class ConfigStore(dict):
+    def load(self, name):
+        raise Exception("this is an abstract method")
+
+    def _load_file_list(self, file_list):
         for filepath in file_list:
             self._update(self._read_file(filepath))
 
@@ -59,4 +58,35 @@ class Config(dict):
             print "[warning] config: file '%s' could not be loaded" % (filepath)
 
         return data
+   
+class Config(ConfigStore):
+    def load(self, filepath=None):
+        file_list = [
+            os.path.join(os.path.dirname(__file__), u'config.default.yaml'),
+            os.path.expanduser(os.path.join(u'~', u'.config', u'afro', u'config.yaml')),
+        ]
+
+        if (filepath):
+            file_list.append(filepath)
+
+        self._load_file_list(file_list)
+
+    def get_profile(self, name=None):
+        profile = Profile()
+
+        if not name:
+            name = self['profile']
+
+        profile.load(name)
+        return profile
+
+class Profile(ConfigStore):
+    def load(self, name):
+        file_list = [
+            os.path.join(os.path.dirname(__file__), u'profiles', u'default.yaml'),
+            os.path.join(os.path.dirname(__file__), u'profiles', u'%s.yaml' % name),
+            os.path.expanduser(os.path.join(u'~', u'config', u'afro', u'profiles', u'%s.yaml' % name)),
+        ]
+
+        self._load_file_list(file_list)
 

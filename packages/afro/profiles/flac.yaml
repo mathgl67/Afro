@@ -1,0 +1,6 @@
+# vim:set ts=4 sw=4 expandtab:
+tools:
+    encoder:
+        binary: 'flac'
+        format: '%(binary)s %(options)s -o %(outfile)s %(infile)s'
+        options: '--best --delete-input-file --force'

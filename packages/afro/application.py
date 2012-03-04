@@ -51,6 +51,9 @@ class Application:
         config = Config()
         config.load()
 
+        #get profile
+        profile = config.get_profile()
+
         # read disc info
         di = disc_info()
         disc = di[args.num - 1]
@@ -64,7 +67,7 @@ class Application:
             disc['genre'] = args.genre
 
         # prepare the formater
-        formater = Formater(config)
+        formater = Formater(profile)
 
         # prepare folder
         folder_name = formater.format('folder', disc) 
@@ -79,10 +82,10 @@ class Application:
         ff = formater.format('metafiles', disc)
 
         #prepare hash
-        hasher = Hasher(folder, ff, config)
+        hasher = Hasher(folder, ff, profile)
 
         #prepare playlist
-        m3u = M3U(folder, ff, config)
+        m3u = M3U(folder, ff, profile)
 
         #track jobs.
         for track in disc['tracks']:
@@ -93,11 +96,11 @@ class Application:
 
             #rip
             print 'rip:', track_name
-            track_rip(track['tracknumber'], track_wav, config)
+            track_rip(track['tracknumber'], track_wav, profile['tools']['ripper'], config['logging'])
 
             #encode
             print 'encode:', track_name
-            track_enc(track_wav, track_flac, config)
+            track_enc(track_wav, track_flac, profile['tools']['encoder'], config['logging'])
         
             #tags
             print 'tag:', track_name
