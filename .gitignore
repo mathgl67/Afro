@@ -3,3 +3,6 @@ output
 *.session
 *.sw?
 *.pyc
+MANIFEST
+build
+dist
