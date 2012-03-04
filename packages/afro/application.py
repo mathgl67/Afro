@@ -49,10 +49,10 @@ class Application:
     def rip(self, args):
         # read config
         config = Config()
-        config.load()
+        config.load(args.config)
 
         #get profile
-        profile = config.get_profile()
+        profile = config.get_profile(args.profile)
 
         # read disc info
         di = disc_info()
@@ -120,7 +120,6 @@ class Application:
     
         #save playlist
         m3u.save()
- 
 
     def main(self):
         # args parser
@@ -138,6 +137,8 @@ class Application:
         parser_rip.set_defaults(func=self.rip)
         parser_rip.add_argument('--genre')
         parser_rip.add_argument('--edit', '-e', action="store_true")
+        parser_rip.add_argument('--config', '-c')
+        parser_rip.add_argument('--profile', '-p')
         parser_rip.add_argument('num', type=int)
 
         args = parser.parse_args()

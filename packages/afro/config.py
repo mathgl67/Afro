@@ -73,11 +73,7 @@ class Config(ConfigStore):
 
     def get_profile(self, name=None):
         profile = Profile()
-
-        if not name:
-            name = self['profile']
-
-        profile.load(name)
+        profile.load(name if name else self['profile'])
         return profile
 
 class Profile(ConfigStore):
