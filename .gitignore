@@ -1,8 +1,13 @@
+#application
 output
 *.log
+#editor
 *.session
 *.sw?
+\#*\#
+#python
 *.pyc
+#distutils
 MANIFEST
 build
 dist
