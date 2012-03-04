@@ -1,6 +1,14 @@
 CHANGELOG
 =========
 
+Version 0.3.0
+-------------
+
+ * feature: default values are now stored in the package and they can be override by user's config file (issue #2)
+ * git: add emacs files to ignore list
+ * feature: installer, reorganise source directory (issue #3)
+ * config: add cases of character replacements and deletions
+
 Version 0.2.2
 -------------
 
