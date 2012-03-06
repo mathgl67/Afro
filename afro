@@ -20,5 +20,5 @@
 #
 
 CURDIR=`dirname $0`
-PYTHONPATH=$CURDIR/packages $CURDIR/scripts/afro $*
+PYTHONPATH=$CURDIR/packages:$PYTHONPATH $CURDIR/scripts/afro $*
 
