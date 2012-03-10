@@ -19,7 +19,6 @@
 #
 
 import sys
-import os
 import codecs
 import tempfile 
 import subprocess
@@ -37,9 +36,9 @@ def disc_info():
         print e.message
         sys.exit(1)
 
-    filter = musicbrainz2.webservice.ReleaseFilter(discId=disc.getId())
+    mb_filter = musicbrainz2.webservice.ReleaseFilter(discId=disc.getId())
     result_list = []
-    for result in query.getReleases(filter):
+    for result in query.getReleases(mb_filter):
         track_list = []
         for num, track in enumerate(result.release.tracks):
             track_list.append({
@@ -68,7 +67,9 @@ def disc_info():
     return result_list
 
 def edit_info(disc, config):
-    (file_fd, file_path) = tempfile.mkstemp() 
+    (file_fd, file_path) = tempfile.mkstemp()
+    file_fd.close()
+    
     file_obj = codecs.open(file_path, 'w', 'utf-8')
     json.dump(disc, file_obj, indent=2, sort_keys=True, ensure_ascii=False)
     file_obj.close()
