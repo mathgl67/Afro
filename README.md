@@ -4,7 +4,7 @@ README
 Introduction
 ------------
 
-**AFRO** is **A**nother **F**lac **R**ipping **O**rchestra
+**AFRO** is **A**nother **F**ree **R**ipping **O**rchestra
 
 Requirements
 ------------

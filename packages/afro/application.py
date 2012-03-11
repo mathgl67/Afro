@@ -132,7 +132,7 @@ class Application:
 
     def main(self):
         # args parser
-        parser = argparse.ArgumentParser(description="Another Flac Ripping Ohohoh")
+        parser = argparse.ArgumentParser(description="Another Free Ripping Orchestra")
         subparsers = parser.add_subparsers(title="commands", description="valid command")
 
         parser_list = subparsers.add_parser('list')
