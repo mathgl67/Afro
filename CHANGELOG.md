@@ -1,6 +1,21 @@
 CHANGELOG
 =========
 
+Version 0.4.0
+-------------
+
+ * doc: add usefull options section
+ * doc: change project name
+ * doc: append new encoding softwares used in external softwares
+ * feature: support multiple audio format (issue #6)
+ * fix: use a real function to close the file descriptor
+ * doc: quick update on basic usage
+ * fix: few minor fixes
+ * other: eclipse project files
+ * fix: do not override PYTHONPATH.
+ * feature: profile and config can now be selected from cmdline arguments
+ * feature: profiles (issue #7)
+
 Version 0.3.0
 -------------
 
