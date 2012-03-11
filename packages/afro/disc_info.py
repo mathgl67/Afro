@@ -19,6 +19,7 @@
 #
 
 import sys
+import os
 import codecs
 import tempfile 
 import subprocess
@@ -68,7 +69,7 @@ def disc_info():
 
 def edit_info(disc, config):
     (file_fd, file_path) = tempfile.mkstemp()
-    file_fd.close()
+    os.close(file_fd)
     
     file_obj = codecs.open(file_path, 'w', 'utf-8')
     json.dump(disc, file_obj, indent=2, sort_keys=True, ensure_ascii=False)

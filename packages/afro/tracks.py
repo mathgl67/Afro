@@ -18,8 +18,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-import mutagen.flac
-import mutagen.easyid3
+import os
+import mutagen
 
 from afro.utils import command_run
 
@@ -39,23 +39,25 @@ def track_enc(infile, outfile, encoder, logfile):
         'infile': infile,
         'outfile': outfile,
     }
-    return command_run(cmd, logfile)
+    result = command_run(cmd, logfile)
+    
+    #remove input
+    if encoder['need_input_remove']:
+        os.remove(infile)
+        
+    return result
 
 def track_length(infile):
-    audio = mutagen.flac.FLAC(infile)
+    audio = mutagen.File(infile, easy=True)
     return int(audio.info.length)
 
-def track_tag(infile, disc, track):
-    tagger = []
-    tagger.append(mutagen.easyid3.EasyID3())
-    tagger.append(mutagen.flac.FLAC(infile))
-
-    for t in tagger:
-        t['tracknumber'] = unicode(track['tracknumber'])
-        t['artist'] = disc['artist']
-        t['album'] = disc['title']
-        t['title'] = track['title']
-        t['date'] = disc['date']
-        t['genre'] = disc['genre'] 
-        t.save(infile);
+def track_tag(infile, track_info):
+    t = mutagen.File(infile, easy=True)
+    t['tracknumber'] = track_info['tracknumber']
+    t['artist'] = track_info['artist']
+    t['album'] = track_info['album']
+    t['title'] = track_info['title']
+    t['date'] = track_info['date']
+    t['genre'] = track_info['genre'] 
+    t.save(infile);
 

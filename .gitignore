@@ -11,3 +11,6 @@ output
 MANIFEST
 build
 dist
+#others
+.settings
+.DS_Store
