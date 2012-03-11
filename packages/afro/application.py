@@ -90,8 +90,18 @@ class Application:
         for track in disc['tracks']:
             track_name = formater.format('track', disc, track) 
             track_path = u'%s/%s' % (folder, track_name)
-            track_flac = u'%s.flac' % (track_path)
+            track_ext = profile['tools']['encoder']['extension']
+            track_out = u'%s.%s' % (track_path, track_ext)
             track_wav = u'%s.wav' % (track_path)
+            
+            track_info = {
+              'date': disc['date'],
+              'tracknumber': unicode(track['tracknumber']),
+              'title': track['title'],
+              'album': disc['title'],
+              'artist': disc['artist'],
+              'genre': disc['genre'],
+            }
 
             #rip
             print 'rip:', track_name
@@ -99,20 +109,20 @@ class Application:
 
             #encode
             print 'encode:', track_name
-            track_enc(track_wav, track_flac, profile['tools']['encoder'], config['logging'])
+            track_enc(track_wav, track_out, profile['tools']['encoder'], config['logging'])
         
             #tags
             print 'tag:', track_name
-            track_tag(track_flac, disc, track)
+            track_tag(track_out, track_info)
     
             #get the real track length
-            track['duration_real'] = track_length(track_flac)
+            track['duration_real'] = track_length(track_out)
        
             #perform hash on the file
-            hasher.perform(u'%s.flac' % track_name)
+            hasher.perform(u'%s.%s' % (track_name, track_ext))
         
             #playlist
-            m3u.append(u'%s.flac' % track_name, track)
+            m3u.append(u'%s.%s' % (track_name, track_ext), track)
 
         #save hash
         hasher.save()

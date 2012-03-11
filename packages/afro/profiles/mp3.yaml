@@ -1,0 +1,7 @@
+# vim:set ts=4 sw=4 expandtab:
+tools:
+    encoder:
+        extension: 'mp3'
+        binary: 'lame'
+        format: '%(binary)s %(options)s %(infile)s %(outfile)s'
+        options: '-m s -q 0 -V 0 -b 64 -B 320'

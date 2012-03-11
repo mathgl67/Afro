@@ -1,7 +1,7 @@
 # vim:set ts=4 sw=4 expandtab:
 formater:
     folder:
-        format: '%(artist)s-%(album)s-%(date)s-FLAC'
+        format: '%(artist)s-%(album)s-%(date)s-AFRO'
         transformer: ['capwords', 'underscore', 'replace_list', 'remove_list', 'strip']
     metafiles:
         format: '00-%(artist)s-%(album)s-%(date)s'
@@ -27,6 +27,8 @@ hasher:
         extension: 'sha512sum'
         algorithm: 'sha512'  
 tools:
+    encoder:
+        need_input_remove: true
     ripper:
         binary: 'cdparanoia'
         format: '%(binary)s %(options)s %(tracknumber)d %(outfile)s'
