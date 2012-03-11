@@ -38,3 +38,14 @@ Basic Usage
  1. Rip a CD using the informations from an entry:
  
  `# afro rip 1`
+
+Usefull options
+---------------
+
+ - Edit retrieved by MusicBrainz informations
+ 
+  `# afro rip 1 --edit`
+ 
+ - Select a profile
+ 
+  `# afro rip 1 --profile mp3`
