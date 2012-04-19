@@ -27,16 +27,25 @@ import json
 import musicbrainz2.disc
 import musicbrainz2.webservice
 
-def disc_info():
-    service = musicbrainz2.webservice.WebService()
-    query = musicbrainz2.webservice.Query(service)
-    
+
+def _read_disc(): 
     try:
         disc = musicbrainz2.disc.readDisc()
     except musicbrainz2.disc.DiscError, e:
         print e.message
         sys.exit(1)
+        
+    return disc
 
+def disc_sumission_url():
+    disc = _read_disc()
+    return musicbrainz2.disc.getSubmissionUrl(disc)
+    
+def disc_info():
+    disc = _read_disc()
+    service = musicbrainz2.webservice.WebService()
+    query = musicbrainz2.webservice.Query(service)
+        
     mb_filter = musicbrainz2.webservice.ReleaseFilter(discId=disc.getId())
     result_list = []
     for result in query.getReleases(mb_filter):

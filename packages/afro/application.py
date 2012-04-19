@@ -22,7 +22,7 @@ import os
 import argparse
 
 from afro.config import Config
-from afro.disc_info import disc_info, edit_info 
+from afro.disc_info import disc_info, disc_sumission_url, edit_info 
 from afro.formater import Formater
 from afro.hasher import Hasher
 from afro.playlist import M3U
@@ -36,6 +36,9 @@ class Application:
             num = num + 1
             disc['num'] = num 
             print '%(num)d - %(artist)s - %(title)s - %(date)s - %(country)s' % disc 
+        if len(infos) < 1:
+	    print 'No info found in the MusicBrainz database.'
+	    print 'Consider adding it via', disc_sumission_url()
 
     def info(self, args):
         infos = disc_info()
