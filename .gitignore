@@ -4,6 +4,7 @@ output
 #editor
 *.session
 *.sw?
+*~
 \#*\#
 #python
 *.pyc
