@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+Version 0.4.1
+-------------
+
+ * fix: missing dot for profile loading in the homedir
+ * fix: now suggest adding to musicbrainz when no entry
+
 Version 0.4.0
 -------------
 
