@@ -81,7 +81,7 @@ class Profile(ConfigStore):
         file_list = [
             os.path.join(os.path.dirname(__file__), u'profiles', u'default.yaml'),
             os.path.join(os.path.dirname(__file__), u'profiles', u'%s.yaml' % name),
-            os.path.expanduser(os.path.join(u'~', u'config', u'afro', u'profiles', u'%s.yaml' % name)),
+            os.path.expanduser(os.path.join(u'~', u'.config', u'afro', u'profiles', u'%s.yaml' % name)),
         ]
 
         self._load_file_list(file_list)
