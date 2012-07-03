@@ -21,6 +21,8 @@
 import os
 import argparse
 
+os.
+
 from afro.config import Config
 from afro.disc_info import disc_info, disc_sumission_url, edit_info 
 from afro.formater import Formater
@@ -32,6 +34,7 @@ class Application:
     def list(self, args):
         num = 0
         infos = disc_info()
+        print 'Consider adding it via', disc_sumission_url()
         for disc in infos:
             num = num + 1
             disc['num'] = num 
