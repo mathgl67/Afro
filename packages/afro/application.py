@@ -21,8 +21,6 @@
 import os
 import argparse
 
-os.
-
 from afro.config import Config
 from afro.disc_info import disc_info, disc_sumission_url, edit_info 
 from afro.formater import Formater
