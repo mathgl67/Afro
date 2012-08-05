@@ -72,7 +72,6 @@ def disc_info():
             'genre': 'none',
             'country': country,
             'tracks': track_list,
-            
         })
     return result_list
 

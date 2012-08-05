@@ -60,13 +60,15 @@ class Application:
         di = disc_info()
         disc = di[args.num - 1]
 
+        # use command line arguments to override musicbrainz data
+        if args.genre:
+            disc['genre'] = args.genre
+
+        disc['discnumber'] = args.disc_number
+
         # edit
         if args.edit:
             disc = edit_info(disc, config)
-
-        # prepare disc
-        if args.genre:
-            disc['genre'] = args.genre
 
         # prepare the formater
         formater = Formater(profile)
@@ -100,6 +102,7 @@ class Application:
             track_info = {
               'date': disc['date'],
               'tracknumber': unicode(track['tracknumber']),
+              'discnumber': unicode(disc['discnumber']),
               'title': track['title'],
               'album': disc['title'],
               'artist': disc['artist'],
@@ -151,6 +154,7 @@ class Application:
         parser_rip.add_argument('--edit', '-e', action="store_true")
         parser_rip.add_argument('--config', '-c')
         parser_rip.add_argument('--profile', '-p')
+        parser_rip.add_argument('--disc-number', '-n', type=int, default=1)
         parser_rip.add_argument('num', type=int)
 
         args = parser.parse_args()

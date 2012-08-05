@@ -53,6 +53,7 @@ def track_length(infile):
 
 def track_tag(infile, track_info):
     t = mutagen.File(infile, easy=True)
+    t['discnumber'] = track_info['discnumber']
     t['tracknumber'] = track_info['tracknumber']
     t['artist'] = track_info['artist']
     t['album'] = track_info['album']
