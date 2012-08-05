@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+Version 0.5.0
+-------------
+
+ * feature: add a way to control the order of transformations
+ * feature: multi-cd support
+ * feature: add the disc number tag in audio files
+ * improve messages by using warning or error keyword
+ * fix: only show the submission url when cd not in db
+ * profile: changes in replacement list
+ * feature: display the musicbrainz sumission url
+
 Version 0.4.1
 -------------
 
