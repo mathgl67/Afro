@@ -12,6 +12,13 @@ formater:
     track_multicd:
         format: '%(discnumber)01d%(tracknumber)02d-%(title)s'
         transformer: ['lowercase', 'underscore', 'replace_list', 'remove_list', 'strip']
+formater_order:
+    replace_list: 0
+    remove_list: 0
+    lowercase: 10
+    capwords: 10
+    strip: 20
+    underscore: 30
 transformer:
     replace_list: {'é': 'e', 'è': 'e', 'ê': 'e', 'à': 'a', 'â': 'a', 'î': 'i',
                    'ô': 'o', 'ó': 'o', 'œ': 'oe', 'ù': 'u', 'í': 'i', 'ï': 'i',

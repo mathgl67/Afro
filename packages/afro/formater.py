@@ -85,13 +85,24 @@ class Formater:
 
         return data
 
+    def order_cmp(self, f1, f2):
+        order = self.config['formater_order']
+
+        if order.has_key(f1) and order.has_key(f2):
+            return cmp(order[f1], order[f2])
+        elif order.has_key(f1):
+            return 1
+        else:
+            return -1 
+
     def format(self, name, disc, track=None):
         data = self.prepare_data(disc, track)
         for key in data.keys():
             text = data[key]
             # ignore non unicode data
             if not isinstance(text, int):
-                for transformer in sorted(self.config['formater'][name]['transformer']):
+                transformer_list = self.config['formater'][name]['transformer']
+                for transformer in sorted(transformer_list, self.order_cmp):
                     text = self._inst[transformer].transform(text)
             data[key] = text
 
