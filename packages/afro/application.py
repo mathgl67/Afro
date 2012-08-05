@@ -91,9 +91,17 @@ class Application:
         #prepare playlist
         m3u = M3U(folder, ff, profile)
 
+        #read content of previous playlist and hasher for multicd
+        if args.multi_cd:
+            m3u.load()
+            hasher.load()
+
+        #set trackformater by checking multicd arguments
+        track_formater = 'track_multicd' if args.multi_cd else 'track'
+
         #track jobs.
         for track in disc['tracks']:
-            track_name = formater.format('track', disc, track) 
+            track_name = formater.format(track_formater, disc, track) 
             track_path = u'%s/%s' % (folder, track_name)
             track_ext = profile['tools']['encoder']['extension']
             track_out = u'%s.%s' % (track_path, track_ext)
@@ -122,13 +130,13 @@ class Application:
             track_tag(track_out, track_info)
     
             #get the real track length
-            track['duration_real'] = track_length(track_out)
+            track_duration = track_length(track_out)
        
             #perform hash on the file
             hasher.perform(u'%s.%s' % (track_name, track_ext))
         
             #playlist
-            m3u.append(u'%s.%s' % (track_name, track_ext), track)
+            m3u.append(u'%s.%s' % (track_name, track_ext), track['title'], track_duration) 
 
         #save hash
         hasher.save()
@@ -155,6 +163,7 @@ class Application:
         parser_rip.add_argument('--config', '-c')
         parser_rip.add_argument('--profile', '-p')
         parser_rip.add_argument('--disc-number', '-n', type=int, default=1)
+        parser_rip.add_argument('--multi-cd', '-m', action="store_true", default=False)
         parser_rip.add_argument('num', type=int)
 
         args = parser.parse_args()

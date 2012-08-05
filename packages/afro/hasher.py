@@ -22,6 +22,7 @@ import codecs
 import os
 import zlib
 import hashlib 
+import re
 
 class AbstractHasher:
     def __init__(self, path, name, config):
@@ -29,6 +30,11 @@ class AbstractHasher:
         self.name = name
         self.results = {}
         self.set_config(config)
+        # prepare file full path
+        self.file_fullpath = os.path.join(self.path, '%(file)s.%(extension)s' % {
+            'file': self.name,
+            'extension': self.config['extension'],
+        })
     
     def set_config(self, config):
         raise NotImplementedError('call to abstract method')
@@ -45,12 +51,22 @@ class AbstractHasher:
     def save_write_result(self, file_obj, result):
         raise NotImplementedError('call to abstract method')
 
+    def load_line(self, line):
+        raise NotImplementedError('call to abstract method')
+
+    def load(self):
+        try:
+            file_obj = codecs.open(self.file_fullpath, "r+", "utf-8")
+        except IOError:
+            print "Cannot load file (%s)" % (self.file_fullpath)
+            return False
+        
+        for line in file_obj:
+            self.load_line(line)
+        file_obj.close()
+
     def save(self):
-        fullpath=os.path.join(self.path, '%(file)s.%(extension)s' % {
-            'file': self.name,
-            'extension': self.config['extension'],
-        })
-        file_obj = codecs.open(fullpath, "w+", "utf-8")
+        file_obj = codecs.open(self.file_fullpath, "w+", "utf-8")
         for key in sorted(self.results.keys()):
             self.save_write_result(file_obj, {
                 'file_name': key,
@@ -65,10 +81,18 @@ class SFV(AbstractHasher):
         self.config = config['hasher']['sfv']
     
     def perform_hash(self, file_obj):
-        return zlib.crc32(file_obj.read()) & 0xffffffff
+        return '%08x' % (zlib.crc32(file_obj.read()) & 0xffffffff)
+
+    def load_line(self, line):
+        #ignore comment
+        if re.search(r"^[;#]+", line):
+            return
+
+        m=re.match(r"^(.+) (\S+)$", line)
+        self.results[m.group(1)] = m.group(2)
 
     def save_write_result(self, file_obj, result):
-        file_obj.write(u'%(file_name)s %(file_hash)08x\n' % (result))
+        file_obj.write(u'%(file_name)s %(file_hash)s\n' % (result))
         
 class Shasum(AbstractHasher):
     def set_config(self, config):
@@ -78,6 +102,14 @@ class Shasum(AbstractHasher):
         hasher = hashlib.new(self.config['algorithm'])
         hasher.update(file_obj.read())
         return hasher.hexdigest()
+
+    def load_line(self, line):
+        #ignore comment
+        if re.search(r"^[;#]+", line):
+            return
+
+        m=re.match(r"^(\S+)  (.+)$", line)
+        self.results[m.group(2)] = m.group(1)
 
     def save_write_result(self, file_obj, result):
         #must have two space as separator
@@ -102,6 +134,10 @@ class Hasher:
         
         if self.config['save_on_perform'] == True:
             self.save()
+
+    def load(self):
+        for hasher in self.hasher_obj:
+            hasher.load()
 
     def save(self):
         for hasher in self.hasher_obj:

@@ -9,10 +9,14 @@ formater:
     track:
         format: '%(tracknumber)02d-%(title)s'
         transformer: ['lowercase', 'underscore', 'replace_list', 'remove_list', 'strip']
+    track_multicd:
+        format: '%(discnumber)01d%(tracknumber)02d-%(title)s'
+        transformer: ['lowercase', 'underscore', 'replace_list', 'remove_list', 'strip']
 transformer:
     replace_list: {'é': 'e', 'è': 'e', 'ê': 'e', 'à': 'a', 'â': 'a', 'î': 'i',
                    'ô': 'o', 'ó': 'o', 'œ': 'oe', 'ù': 'u', 'í': 'i', 'ï': 'i',
-                   'æ': 'ae', 'ç': 'c', '*': '_', '-': '_', ' / ': '-'}
+                   'æ': 'ae', 'ç': 'c', '*': '_', '-': '_', ' / ': '-',
+                   '&' : 'and'}
     remove_list: ['!', '.', ',', '?', ':']
 playlist:
     m3u:

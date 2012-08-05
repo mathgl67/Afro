@@ -76,6 +76,7 @@ class Formater:
             'album': disc['title'],
             'genre': disc['genre'],
             'date': disc['date'],
+            'discnumber': disc['discnumber'],
         }
 
         if track != None:

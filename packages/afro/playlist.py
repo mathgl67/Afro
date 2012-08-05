@@ -20,34 +20,58 @@
 
 import os
 import codecs
+import re
 
 class M3U:
     def __init__(self, path, name, config):
         self.config = config['playlist']['m3u']
-        self.path = path
-        self.name = name
+        self.file_path = u'%s.%s' % (
+            os.path.join(path, name),
+            self.config['extension'],
+        )
         self.tracks = []
 
-    def append(self, filename, track):
-        self.tracks.append((filename, track))
+    def append(self, name, title, duration):
+        self.tracks.append((name, title, duration))
         if self.config['save_on_append'] == True:
             self.save()
 
+    def load(self):
+        try:
+            file_obj = codecs.open(self.file_path, 'r+', 'UTF-8')
+        except IOError:
+            print "Cannot load file (%s)" % (self.file_path)
+            return False
+
+        state = 0
+        for line in file_obj:
+            line = line[:-1] 
+            if state == 0:
+                if line != u'#EXTM3U':
+                    print 'File is not a valid m3u playlist (%s)' % self.file_path
+                    file_obj.close()
+                    return False
+                state = state + 1
+            elif state == 1:
+                m = re.match(r"#EXTINF:(\d+),(.+)", line)
+                duration = int(m.group(1))
+                title = m.group(2)
+                state = state + 1
+            else:
+                self.append(line, title, duration)
+                state = 1
+
+        file_obj.close()
+        return True
+
     def save(self):
-        file_obj = codecs.open(u'%s.%s' % (
-                os.path.join(self.path, self.name),
-                self.config['extension']
-            ),
-            'w+', 'UTF-8'
-        )
+        file_obj = codecs.open(self.file_path, 'w+', 'UTF-8')
         #header
         file_obj.write(u'#EXTM3U\n')
         #tracks
-        for file_name, track in self.tracks:
-            file_obj.write(u'#EXTINF:%d,%s\n' % (track['duration_real'], track['title']))
+        for file_name, file_title, file_duration in self.tracks:
+            file_obj.write(u'#EXTINF:%d,%s\n' % (file_duration, file_title))
             file_obj.write(u'%s\n' % file_name)
         #save
         file_obj.close()
-
-           
 
