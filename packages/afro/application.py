@@ -32,14 +32,13 @@ class Application:
     def list(self, args):
         num = 0
         infos = disc_info()
-        print 'Consider adding it via', disc_sumission_url()
         for disc in infos:
             num = num + 1
             disc['num'] = num 
             print '%(num)d - %(artist)s - %(title)s - %(date)s - %(country)s' % disc 
         if len(infos) < 1:
-	    print 'No info found in the MusicBrainz database.'
-	    print 'Consider adding it via', disc_sumission_url()
+            print 'No info found in the MusicBrainz database.'
+            print 'Consider adding it via', disc_sumission_url()
 
     def info(self, args):
         infos = disc_info()
