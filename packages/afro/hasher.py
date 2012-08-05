@@ -58,7 +58,7 @@ class AbstractHasher:
         try:
             file_obj = codecs.open(self.file_fullpath, "r+", "utf-8")
         except IOError:
-            print "Cannot load file (%s)" % (self.file_fullpath)
+            print "[warning] hasher: cannot load file (%s)" % (self.file_fullpath)
             return False
         
         for line in file_obj:

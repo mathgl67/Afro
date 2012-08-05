@@ -32,7 +32,7 @@ def _read_disc():
     try:
         disc = musicbrainz2.disc.readDisc()
     except musicbrainz2.disc.DiscError, e:
-        print e.message
+        print "[error] %s" % e.message
         sys.exit(1)
         
     return disc

@@ -37,8 +37,8 @@ class Application:
             disc['num'] = num 
             print '%(num)d - %(artist)s - %(title)s - %(date)s - %(country)s' % disc 
         if len(infos) < 1:
-            print 'No info found in the MusicBrainz database.'
-            print 'Consider adding it via', disc_sumission_url()
+            print '[warning] no info found in the MusicBrainz database.'
+            print 'Consider adding it via: %s' % disc_sumission_url()
 
     def info(self, args):
         infos = disc_info()
@@ -80,7 +80,7 @@ class Application:
         try:
             os.makedirs(folder)
         except OSError:
-            print "Directory already exists or permission denied"
+            print "[warning] directory already exists or permission denied"
 
         #metafiles
         ff = formater.format('metafiles', disc)

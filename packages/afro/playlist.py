@@ -18,6 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import sys
 import os
 import codecs
 import re
@@ -40,7 +41,7 @@ class M3U:
         try:
             file_obj = codecs.open(self.file_path, 'r+', 'UTF-8')
         except IOError:
-            print "Cannot load file (%s)" % (self.file_path)
+            print "[warning] hasher: cannot load file (%s)" % (self.file_path)
             return False
 
         state = 0
@@ -48,9 +49,9 @@ class M3U:
             line = line[:-1] 
             if state == 0:
                 if line != u'#EXTM3U':
-                    print 'File is not a valid m3u playlist (%s)' % self.file_path
+                    print '[error] file isn\'t a valid playlist (%s)' % self.file_path
                     file_obj.close()
-                    return False
+                    sys.exit(1)
                 state = state + 1
             elif state == 1:
                 m = re.match(r"#EXTINF:(\d+),(.+)", line)
