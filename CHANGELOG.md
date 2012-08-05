@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+Version 0.5.1
+-------------
+
+ * fix: update replace and remove list
+
 Version 0.5.0
 -------------
 
