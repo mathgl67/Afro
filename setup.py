@@ -40,7 +40,7 @@ setup(
     scripts=['scripts/afro'],
     download_url='https://github.com/mathgl67/Afro/releases',
     platforms=['Linux', 'MacOSx'],
-    license=open('COPYING').read(),
+    license=open('COPYING.txt').read(),
     install_requires=requirements('requirements.txt'),
     classifiers=[
         'Development Status :: 5 - Production/Stable',

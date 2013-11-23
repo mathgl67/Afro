@@ -2,10 +2,15 @@
 CHANGELOG
 =========
 
+Version 0.5.5
+-------------
+
+- fix: requirements.txt was missing from sdist
+
 Version 0.5.4
 -------------
 
- - fix: classifiers.
+- fix: classifiers.
 
 Version 0.5.3
 -------------
