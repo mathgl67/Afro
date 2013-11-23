@@ -15,6 +15,10 @@ Afro is designed to run on Python version 2 and depends on the following python 
  - PyYaml: http://pyyaml.org/
  - Musicbrainz2: http://musicbrainz.org/doc/python-musicbrainz2
 
+Theses dependencies can be installed with pip using the requirements.txt file. 
+
+`# pip install -r requirements.txt`
+
 It also need some external softwares:
 
  - cdparanoia: http://xiph.org/paranoia/

@@ -1,0 +1,3 @@
+PyYAML>=3.10
+mutagen>=1.22
+python-musicbrainz2>=0.7.4
