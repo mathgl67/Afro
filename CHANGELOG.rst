@@ -2,11 +2,12 @@
 CHANGELOG
 =========
 
-Version 0.6.0
+Version 0.5.3
 -------------
 
 - convert documentation to restructuredText (README, AUTHORS, CHANGELOG, ...) 
 - improve meta-data for pypi
+- specified dependencies
 - remove the python version from shebang
 
 Version 0.5.2
