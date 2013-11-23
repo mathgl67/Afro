@@ -62,8 +62,8 @@ class ConfigStore(dict):
 class Config(ConfigStore):
     def load(self, filepath=None):
         file_list = [
-            os.path.join(os.path.dirname(__file__), u'config.default.yaml'),
-            os.path.expanduser(os.path.join(u'~', u'.config', u'afro', u'config.yaml')),
+            os.path.join(os.path.dirname(__file__), u'config.default.yml'),
+            os.path.expanduser(os.path.join(u'~', u'.config', u'afro', u'config.yml')),
         ]
 
         if (filepath):
@@ -79,9 +79,9 @@ class Config(ConfigStore):
 class Profile(ConfigStore):
     def load(self, name):
         file_list = [
-            os.path.join(os.path.dirname(__file__), u'profiles', u'default.yaml'),
-            os.path.join(os.path.dirname(__file__), u'profiles', u'%s.yaml' % name),
-            os.path.expanduser(os.path.join(u'~', u'.config', u'afro', u'profiles', u'%s.yaml' % name)),
+            os.path.join(os.path.dirname(__file__), u'profiles', u'default.yml'),
+            os.path.join(os.path.dirname(__file__), u'profiles', u'%s.yml' % name),
+            os.path.expanduser(os.path.join(u'~', u'.config', u'afro', u'profiles', u'%s.yml' % name)),
         ]
 
         self._load_file_list(file_list)

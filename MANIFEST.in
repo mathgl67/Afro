@@ -1,0 +1,2 @@
+recursive-include packages *.py *.yml
+include *.rst COPYING
