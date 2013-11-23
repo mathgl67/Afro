@@ -16,12 +16,6 @@ Afro is designed to run on Python version 2 and depends on the following python 
 - `PyYaml <http://pyyaml.org/>`_
 - `Musicbrainz2 <http://musicbrainz.org/doc/python-musicbrainz2>`_
 
-Theses dependencies can be installed with pip using the requirements.txt file. 
-
-.. code-block:: bash
-
-    $ pip install -r requirements.txt
-
 It also need some external softwares:
 
 - `cdparanoia <http://xiph.org/paranoia>`_
@@ -30,6 +24,16 @@ It also need some external softwares:
 - `lame <http://lame.sourceforge.net/>`_
 
 It's tested to be working on MacOSX and Linux.
+
+Installation
+------------
+
+The easiest way to install **AFRO** is to use `pip <https://pypi.python.org/pypi/pip>`_.
+
+.. code-block:: bash
+
+    $ pip install afro
+
 
 Basic Usage
 -----------
