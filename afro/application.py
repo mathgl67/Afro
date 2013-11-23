@@ -168,4 +168,9 @@ class Application:
 
         args = parser.parse_args()
         args.func(args)
+
+def main():
+    app = Application()
+    app.main()
+
  

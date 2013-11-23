@@ -19,7 +19,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from setuptools import setup
+from setuptools import setup, find_packages
 from pip.req import parse_requirements
 
 def requirements(file_name):
@@ -33,16 +33,10 @@ setup(
     version='0.5.6',
     description='Another Free Ripping Orchestra',
     long_description=open('README.rst').read(),
-    url='https://github.com/mathgl67/Afro',
-    packages=['afro'],
-    package_dir={'afro': 'packages/afro'},
-    package_data={'afro': ['config.default.yaml']},
-    include_package_data = True,
-    scripts=['scripts/afro'],
-    download_url='https://github.com/mathgl67/Afro/releases',
     platforms=['Linux', 'MacOSx'],
     license=open('COPYING.txt').read(),
-    install_requires=requirements('requirements.txt'),
+    url='https://github.com/mathgl67/Afro',
+    download_url='https://github.com/mathgl67/Afro/releases',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
@@ -55,6 +49,14 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Topic :: Multimedia :: Sound/Audio :: CD Audio :: CD Ripping',
         'Topic :: Multimedia :: Sound/Audio :: Conversion',
-    ]
+    ],   
+    packages=find_packages(),
+    include_package_data = True,
+    entry_points = {
+        'console_scripts': [
+            'afro = afro.application:main',
+        ],
+    },
+    install_requires=requirements('requirements.txt')
 )
 

@@ -1,2 +1,2 @@
-recursive-include packages *.py *.yml
+recursive-include afro *.py *.yml
 include *.rst *.txt
