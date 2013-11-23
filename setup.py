@@ -25,7 +25,7 @@ setup(
     name='afro',
     author='mathgl67',
     author_email='mathgl67_AT_gmail.com',
-    version='0.4.0',
+    version='0.5.2',
     description='Another Free Ripping Orchestra',
     url='https://github.com/mathgl67/Afro',
     packages=['afro'],

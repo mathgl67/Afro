@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+Version 0.5.2
+-------------
+
+ * add requirements.txt for pip.
+
 Version 0.5.1
 -------------
 
