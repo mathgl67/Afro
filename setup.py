@@ -37,6 +37,7 @@ setup(
     packages=['afro'],
     package_dir={'afro': 'packages/afro'},
     package_data={'afro': ['config.default.yaml']},
+    include_package_data = True,
     scripts=['scripts/afro'],
     download_url='https://github.com/mathgl67/Afro/releases',
     platforms=['Linux', 'MacOSx'],

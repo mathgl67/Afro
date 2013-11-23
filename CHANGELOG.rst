@@ -2,6 +2,11 @@
 CHANGELOG
 =========
 
+Version 0.5.6
+-------------
+
+- fix: installation must include configuration files.
+
 Version 0.5.5
 -------------
 
