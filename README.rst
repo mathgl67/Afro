@@ -47,7 +47,7 @@ Basic Usage
     $ afro info 1
  
 #. Rip a CD using the informations from an entry:
- `
+
 .. code-block:: bash
 
     $ afro rip 1
