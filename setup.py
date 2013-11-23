@@ -30,7 +30,7 @@ setup(
     name='afro',
     author='mathgl67',
     author_email='mathgl67_AT_gmail.com',
-    version='0.5.4',
+    version='0.5.5',
     description='Another Free Ripping Orchestra',
     long_description=open('README.rst').read(),
     url='https://github.com/mathgl67/Afro',
