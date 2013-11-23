@@ -18,7 +18,9 @@ Afro is designed to run on Python version 2 and depends on the following python 
 
 Theses dependencies can be installed with pip using the requirements.txt file. 
 
-`# pip install -r requirements.txt`
+.. code-block:: bash
+
+    $ pip install -r requirements.txt
 
 It also need some external softwares:
 
@@ -34,24 +36,34 @@ Basic Usage
 
 #. Show entries found in MusicBrainz's database for the inserted CD:
  
- `# afro list`
+.. code-block:: bash
+
+    $ afro list
  
 #. Get more informations for an entry:
  
- `# afro info 1`
+.. code-block:: bash
+
+    $ afro info 1
  
 #. Rip a CD using the informations from an entry:
- 
- `# afro rip 1`
+ `
+.. code-block:: bash
+
+    $ afro rip 1
 
 Usefull options
 ---------------
 
 - Edit retrieved by MusicBrainz informations
  
-  `# afro rip 1 --edit`
+.. code-block:: bash
+
+    $ afro rip 1 --edit
  
 - Select a profile
- 
-  `# afro rip 1 --profile mp3`
+
+.. code-block:: bash
+
+    $ afro rip 1 --profile mp3
 
