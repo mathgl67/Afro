@@ -19,7 +19,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from distutils.core import setup
+from setuptools import setup
+from pip.req import parse_requirements
+
+def requirements(file_name):
+    requirements = parse_requirements(file_name)
+    return [str(requirement.req) for requirement in requirements]
 
 setup(
     name='afro',
@@ -36,6 +41,7 @@ setup(
     download_url='https://github.com/mathgl67/Afro/releases',
     platforms=['Linux', 'MacOSx'],
     license=open('COPYING').read(),
+    install_requires=requirements('requirements.txt'),
     classifiers=[
         'Classifier: Development Status :: 5 - Production/Stable',
         'Classifier: Environment :: Console',
