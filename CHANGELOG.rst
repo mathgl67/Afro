@@ -2,6 +2,11 @@
 CHANGELOG
 =========
 
+Version 0.5.4
+-------------
+
+ - fix: classifiers.
+
 Version 0.5.3
 -------------
 

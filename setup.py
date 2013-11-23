@@ -43,17 +43,17 @@ setup(
     license=open('COPYING').read(),
     install_requires=requirements('requirements.txt'),
     classifiers=[
-        'Classifier: Development Status :: 5 - Production/Stable',
-        'Classifier: Environment :: Console',
-        'Classifier: Intended Audience :: End Users/Desktop',
-        'Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
-        'Classifier: Natural Language :: English',
-        'Classifier: Operating System :: MacOS :: MacOS X',
-        'Classifier: Operating System :: POSIX :: Linux',
-        'Classifier: Programming Language :: Python :: 2',
-        'Classifier: Programming Language :: Python :: 2.7',
-        'Classifier: Topic :: Multimedia :: Sound/Audio :: CD Audio :: CD Ripping',
-        'Classifier: Topic :: Multimedia :: Sound/Audio :: Conversion',
+        'Development Status :: 5 - Production/Stable',
+        'Environment :: Console',
+        'Intended Audience :: End Users/Desktop',
+        'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+        'Natural Language :: English',
+        'Operating System :: MacOS :: MacOS X',
+        'Operating System :: POSIX :: Linux',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
+        'Topic :: Multimedia :: Sound/Audio :: CD Audio :: CD Ripping',
+        'Topic :: Multimedia :: Sound/Audio :: Conversion',
     ]
 )
 
