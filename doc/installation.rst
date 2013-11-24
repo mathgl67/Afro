@@ -10,6 +10,7 @@ Afro is designed to run on Python version 2 and depends on the following python 
 - `Mutagen <http://code.google.com/p/mutagen>`_
 - `PyYaml <http://pyyaml.org/>`_
 - `Musicbrainz2 <http://musicbrainz.org/doc/python-musicbrainz2>`_
+- `python-discid <https://python-discid.readthedocs.org>`_
 
 It also need some external softwares:
 
