@@ -53,5 +53,5 @@ There is several steps to get a new release published :
     $ git push --tags
     $ ./setup.py register sdist upload
     $ ./setup.py build_sphinx
-    $ ./setup.py upload_doc
+    $ ./setup.py upload_docs
 
