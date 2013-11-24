@@ -20,8 +20,8 @@ It also need some external softwares:
 
 It's tested to be working on MacOSX and Linux.
 
-Installation
-------------
+Using PyPI
+----------
 
 The easiest way to install **AFRO** is to use `pip <https://pypi.python.org/pypi/pip>`_.
 All dependencies will be installed automatically.
