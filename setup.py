@@ -51,10 +51,11 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Topic :: Multimedia :: Sound/Audio :: CD Audio :: CD Ripping',
         'Topic :: Multimedia :: Sound/Audio :: Conversion',
-    ],   
-    packages=find_packages(),
-    include_package_data = True,
-    entry_points = {
+    ],
+    test_suite='tests',
+    packages=find_packages(exclude=['tests']),
+    include_package_data=True,
+    entry_points={
         'console_scripts': [
             'afro = afro.application:main',
         ],

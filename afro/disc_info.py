@@ -18,20 +18,21 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import afro
+
 import sys
 import os
 import codecs
 import tempfile 
 import subprocess
 import json
-import musicbrainz2.webservice
+import musicbrainzngs
 import discid
-
 
 def _read_disc(): 
     try:
         disc = discid.read()
-    except musicbrainz2.disc.DiscError, e:
+    except discid.DiscError as e:
         print "[error] %s" % e.message
         sys.exit(1)
     
@@ -41,39 +42,68 @@ def disc_sumission_url():
     disc = _read_disc()
     return disc.submission_url
     
-def disc_info():
-    disc = _read_disc()
-    service = musicbrainz2.webservice.WebService()
-    query = musicbrainz2.webservice.Query(service)
-        
-    mb_filter = musicbrainz2.webservice.ReleaseFilter(discId=disc.id)
-    result_list = []
-    for result in query.getReleases(mb_filter):
-        track_list = []
-        for num, track in enumerate(result.release.tracks):
-            track_list.append({
-                'tracknumber': num+1,
-                'title': track.title,
-                'duration': track.getDuration(),
+def disc_info_cdstub(cd_stub):
+    tracks = []
+    for num, track in enumerate(cd_stub['track-list']):
+        tracks.append({
+            'tracknumber': num+1,
+            'title': track['title'],
+            'duration': track['length'],
+        })
+
+    return [{
+        'artist': cd_stub['artist'],
+        'title': cd_stub['title'],
+        'date':  'none',
+        'genre': 'none',
+        'country': 'none',
+        'tracks': tracks,
+    }]
+
+def disc_info_disc(disc):
+    results = []
+    for release in disc['release-list']:
+        tracks = []
+        for track in release['medium-list'][0]['track-list']:
+            tracks.append({
+                'tracknumber': track['position'],
+                'title': track['recording']['title'],
+                'duration': track['length'],
             })
 
-        release = result.release.getEarliestReleaseEvent()
-        if release:
-            date = release.date
-            country = release.country
-        else:
-            date = u'none'
-            country = u'none'
-
-        result_list.append({
-            'artist': result.release.artist.name,
-            'title': result.release.title,
-            'date':  date,
+        results.append({
+            'artist': release['artist-credit'][0]['artist']['name'],
+            'title': release['title'],
+            'date':  release['date'],
             'genre': 'none',
-            'country': country,
-            'tracks': track_list,
+            'country': release['country'],
+            'tracks': tracks,
         })
-    return result_list
+
+    return results
+
+def disc_info_fetch(disc_id=None):
+    if not disc_id:
+        disc = _read_disc()
+        disc_id = disc.id
+
+    musicbrainzngs.set_useragent(afro.name, afro.version, afro.url)
+    try:
+        return musicbrainzngs.get_releases_by_discid(disc_id, includes=['artists', 'recordings'])
+    except musicbrainzngs.ResponseError as exception:
+        return None
+
+def disc_info(disc_id=None):
+    fetched = disc_info_fetch(disc_id)
+
+    if 'disc' in fetched:
+        return disc_info_disc(fetched['disc'])
+    elif 'cdstub' in fetched:
+        # If not official musicbrainz data found we can fetch a cdstub...
+        return disc_info_cdstub(fetched['cdstub'])
+    else:
+        print json.dumps(fetched, indent=2)
+        sys.exit(1)
 
 def edit_info(disc, config):
     (file_fd, file_path) = tempfile.mkstemp()

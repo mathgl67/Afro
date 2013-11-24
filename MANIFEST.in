@@ -1,2 +1,3 @@
 recursive-include afro *.py *.yml
+recursive-exclude tests *
 include *.rst *.txt

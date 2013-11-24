@@ -17,9 +17,3 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-
-name = 'Afro'
-url = 'https://github.com/mathgl67/Afro'
-version_major='0.5'
-version_minor='6'
-version = '%s.%s' % (version_major, version_minor)
