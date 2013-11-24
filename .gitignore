@@ -12,6 +12,8 @@ output
 MANIFEST
 build
 dist
+afro.egg-info
 #others
 .settings
 .DS_Store
+venv
