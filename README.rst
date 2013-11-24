@@ -2,8 +2,8 @@
 README
 ======
 
-Introduction
-------------
+Description
+-----------
 
 **AFRO** is **A**\ nother **F**\ ree **R**\ ipping **O**\ rchestra
 

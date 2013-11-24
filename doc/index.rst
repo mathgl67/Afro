@@ -11,8 +11,9 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   installation
+   about
    quickstart
+   changelog
 
 Indices and tables
 ==================

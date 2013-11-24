@@ -1,6 +1,11 @@
-============
-Installation
-============
+=====
+About
+=====
+
+Description
+-----------
+
+**AFRO** is **A**\ nother **F**\ ree **R**\ ipping **O**\ rchestra
 
 Requirements
 ------------
@@ -20,15 +25,3 @@ It also need some external softwares:
 - `lame <http://lame.sourceforge.net/>`_
 
 It's tested to be working on MacOSX and Linux.
-
-Using PyPI
-----------
-
-The easiest way to install **AFRO** is to use `pip <https://pypi.python.org/pypi/pip>`_.
-All dependencies will be installed automatically.
-You just have to ensure that you have the external softwares (cdparanoia and at least one audio encoders).
-
-.. code-block:: bash
-
-    $ pip install afro
-

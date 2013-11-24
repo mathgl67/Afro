@@ -3,6 +3,18 @@
 Quickstart
 ==========
 
+Installation
+------------
+
+The easiest way to install **AFRO** is to use `pip <https://pypi.python.org/pypi/pip>`_.
+All dependencies will be installed automatically.
+You just have to ensure that you have the external softwares (cdparanoia and at least one audio encoders).
+
+.. code-block:: bash
+
+    $ pip install afro
+
+
 Basic Usage
 -----------
 
