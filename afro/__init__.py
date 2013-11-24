@@ -20,6 +20,6 @@
 
 name = 'Afro'
 url = 'https://github.com/mathgl67/Afro'
-version_major='0.5'
-version_minor='6'
+version_major='0.6'
+version_minor='0'
 version = '%s.%s' % (version_major, version_minor)
