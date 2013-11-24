@@ -19,6 +19,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import afro
+
 from setuptools import setup, find_packages
 from pip.req import parse_requirements
 
@@ -30,7 +32,7 @@ setup(
     name='afro',
     author='mathgl67',
     author_email='mathgl67_AT_gmail.com',
-    version='0.5.6',
+    version=afro.version,
     description='Another Free Ripping Orchestra',
     long_description=open('README.rst').read(),
     platforms=['Linux', 'MacOSx'],
