@@ -20,15 +20,38 @@
 
 import os
 import argparse
+import datetime
 
 from afro.config import Config
-from afro.disc_info import disc_info, disc_sumission_url, edit_info 
+from afro.disc_info import disc_info, disc_sumission_url, edit_info, _read_disc
 from afro.formater import Formater
 from afro.hasher import Hasher
 from afro.playlist import M3U
 from afro.tracks import track_rip, track_enc, track_tag, track_length
 
 class Application:
+    def disc_info(self, args):
+        disc = _read_disc()
+
+        print 'id:         ', disc.id
+        print 'freedb_id:  ', disc.freedb_id
+        print 'tracks:     ', len(disc.tracks)
+        print 'length:     ', datetime.timedelta(seconds=disc.seconds)
+        if args.verbose:
+            print 'sectors:    ', disc.sectors
+        print 'submission: ', disc.submission_url
+
+        if args.verbose:
+            print
+            for track in disc.tracks:
+                print '%02d - %s (offset: %d, sectors: %d)' % (
+                    track.number,
+                    datetime.timedelta(seconds=track.seconds),
+                    track.offset,
+                    track.sectors,
+                )
+
+
     def list(self, args):
         num = 0
         infos = disc_info()
@@ -148,6 +171,10 @@ class Application:
         # args parser
         parser = argparse.ArgumentParser(description="Another Free Ripping Orchestra")
         subparsers = parser.add_subparsers(title="commands", description="valid command")
+
+        parser_disc_info = subparsers.add_parser('disc_info')
+        parser_disc_info.add_argument('--verbose', '-v', action="store_true")
+        parser_disc_info.set_defaults(func=self.disc_info)
 
         parser_list = subparsers.add_parser('list')
         parser_list.set_defaults(func=self.list)
