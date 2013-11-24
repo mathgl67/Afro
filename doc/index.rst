@@ -13,6 +13,7 @@ Contents:
 
    about
    quickstart
+   development
    changelog
 
 Indices and tables

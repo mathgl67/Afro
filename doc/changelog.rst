@@ -2,6 +2,17 @@
 Changelog
 =========
 
+0.6
+---
+
+0.6.0
+~~~~~
+
+- doc: reorganise and add more contents...
+- use of "musicbrainzngs" and "python-discid" in remplacement of "musicbrainz2" (that is deprecated)
+- feature: add a command 'disc_info' to display some information about the disc (id, sumission_url, ...).
+- cleanup of the project tree
+
 0.5
 ---
 
