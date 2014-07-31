@@ -80,7 +80,7 @@ class Formater:
         }
 
         if track != None:
-            data['tracknumber'] = track['tracknumber']
+            data['tracknumber'] = int(track['tracknumber'])
             data['title'] = track['title']
 
         return data

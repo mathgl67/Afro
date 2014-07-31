@@ -5,6 +5,11 @@ Changelog
 0.6
 ---
 
+0.6.1
+~~~~~
+
+- fix: tracknumber must be an number for the formater
+
 0.6.0
 ~~~~~
 

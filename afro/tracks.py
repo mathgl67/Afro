@@ -27,7 +27,7 @@ def track_rip(tracknumber, outfile, ripper, logfile):
     cmd = ripper['format'] % {
         'binary': ripper['binary'],
         'options': ripper['options'],
-        'tracknumber': tracknumber,
+        'tracknumber': int(tracknumber),
         'outfile': outfile,
     }
     return command_run(cmd, logfile)
