@@ -9,6 +9,7 @@ Changelog
 ~~~~~
 
 - fix: tracknumber must be an number for the formater
+- upgrade requirements_dev.txt (was broken)
 
 0.6.0
 ~~~~~
