@@ -10,7 +10,7 @@ Description
 Requirements
 ------------
 
-Afro is designed to run on Python version 2 and depends on the following python modules:
+Afro is designed to run on Python version 2/3 and depends on the following python modules:
 
 - `Mutagen <http://code.google.com/p/mutagen>`_
 - `PyYaml <http://pyyaml.org/>`_

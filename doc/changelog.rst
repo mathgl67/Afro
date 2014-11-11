@@ -2,6 +2,16 @@
 Changelog
 =========
 
+0.7
+---
+
+0.7.0
+~~~~~
+
+- the default editor is now vi
+- dependencies upgrade
+- changes for python 3 compatibility
+
 0.6
 ---
 

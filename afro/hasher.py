@@ -18,10 +18,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import codecs
 import os
 import zlib
-import hashlib 
+import hashlib
 import re
 
 class AbstractHasher:
@@ -35,7 +38,7 @@ class AbstractHasher:
             'file': self.name,
             'extension': self.config['extension'],
         })
-    
+
     def set_config(self, config):
         raise NotImplementedError('call to abstract method')
 
@@ -45,7 +48,7 @@ class AbstractHasher:
     def perform(self, file_name):
         fullpath = os.path.join(self.path, file_name)
         file_obj = open(fullpath, 'rb')
-        self.results[file_name] = self.perform_hash(file_obj) 
+        self.results[file_name] = self.perform_hash(file_obj)
         file_obj.close()
 
     def save_write_result(self, file_obj, result):
@@ -58,9 +61,9 @@ class AbstractHasher:
         try:
             file_obj = codecs.open(self.file_fullpath, "r+", "utf-8")
         except IOError:
-            print "[warning] hasher: cannot load file (%s)" % (self.file_fullpath)
+            print("[warning] hasher: cannot load file (%s)" % (self.file_fullpath))
             return False
-        
+
         for line in file_obj:
             self.load_line(line)
         file_obj.close()
@@ -74,12 +77,12 @@ class AbstractHasher:
             })
         file_obj.close()
 
-       
+
 
 class SFV(AbstractHasher):
     def set_config(self, config):
         self.config = config['hasher']['sfv']
-    
+
     def perform_hash(self, file_obj):
         return '%08x' % (zlib.crc32(file_obj.read()) & 0xffffffff)
 
@@ -93,7 +96,7 @@ class SFV(AbstractHasher):
 
     def save_write_result(self, file_obj, result):
         file_obj.write(u'%(file_name)s %(file_hash)s\n' % (result))
-        
+
 class Shasum(AbstractHasher):
     def set_config(self, config):
         self.config = config['hasher']['shasum']
@@ -114,7 +117,7 @@ class Shasum(AbstractHasher):
     def save_write_result(self, file_obj, result):
         #must have two space as separator
         file_obj.write(u'%(file_hash)s  %(file_name)s\n' % result)
-        
+
 
 class Hasher:
     __class = {
@@ -131,7 +134,7 @@ class Hasher:
     def perform(self, file_name):
         for hasher in self.hasher_obj:
             hasher.perform(file_name)
-        
+
         if self.config['save_on_perform'] == True:
             self.save()
 
@@ -142,4 +145,3 @@ class Hasher:
     def save(self):
         for hasher in self.hasher_obj:
             hasher.save()
-

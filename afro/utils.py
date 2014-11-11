@@ -18,6 +18,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import codecs
 import subprocess
 
@@ -26,8 +29,7 @@ def command_run(command, logging):
     if logging['enable']:
         logger = codecs.open(logging['file'], 'w+', 'utf-8')
         logger.write(u'command_run: %s\n' % (command))
-    
+
     command_array = command.split(' ')
     command_retcode = subprocess.call(command_array, stdout=logger, stderr=logger)
     return command_retcode == 0
-

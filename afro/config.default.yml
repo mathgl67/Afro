@@ -7,7 +7,7 @@ logging:
 profile: 'flac'
 tools:
     editor:
-        binary: 'nano'
+        binary: 'vi'
         format: '%(binary)s %(options)s %(file)s'
         options: ''
 

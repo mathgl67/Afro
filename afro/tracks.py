@@ -18,6 +18,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import os
 import mutagen
 
@@ -40,11 +43,11 @@ def track_enc(infile, outfile, encoder, logfile):
         'outfile': outfile,
     }
     result = command_run(cmd, logfile)
-    
+
     #remove input
     if encoder['need_input_remove']:
         os.remove(infile)
-        
+
     return result
 
 def track_length(infile):
@@ -59,6 +62,5 @@ def track_tag(infile, track_info):
     t['album'] = track_info['album']
     t['title'] = track_info['title']
     t['date'] = track_info['date']
-    t['genre'] = track_info['genre'] 
+    t['genre'] = track_info['genre']
     t.save(infile);
-

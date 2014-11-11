@@ -18,30 +18,33 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import afro
 
 import sys
 import os
 import codecs
-import tempfile 
+import tempfile
 import subprocess
 import json
 import musicbrainzngs
 import discid
 
-def _read_disc(): 
+def _read_disc():
     try:
         disc = discid.read()
-    except discid.DiscError as e:
-        print "[error] %s" % e.message
+    except discid.DiscError as exception:
+        print("[error] %s" % exception)
         sys.exit(1)
-    
+
     return disc
 
 def disc_sumission_url():
     disc = _read_disc()
     return disc.submission_url
-    
+
 def disc_info_cdstub(cd_stub):
     tracks = []
     for num, track in enumerate(cd_stub['track-list']):
@@ -68,7 +71,7 @@ def disc_info_disc(disc):
             tracks.append({
                 'tracknumber': track['position'],
                 'title': track['recording']['title'],
-                'duration': track['length'],
+                'duration': track['recording']['length'],
             })
 
         results.append({
@@ -102,13 +105,13 @@ def disc_info(disc_id=None):
         # If not official musicbrainz data found we can fetch a cdstub...
         return disc_info_cdstub(fetched['cdstub'])
     else:
-        print json.dumps(fetched, indent=2)
+        print(json.dumps(fetched, indent=2))
         sys.exit(1)
 
 def edit_info(disc, config):
     (file_fd, file_path) = tempfile.mkstemp()
     os.close(file_fd)
-    
+
     file_obj = codecs.open(file_path, 'w', 'utf-8')
     json.dump(disc, file_obj, indent=2, sort_keys=True, ensure_ascii=False)
     file_obj.close()
@@ -120,11 +123,10 @@ def edit_info(disc, config):
         'file': file_path,
     }
     cmd = editor['format'] % editor_options
-    subprocess.call(cmd.split()) 
+    subprocess.call(cmd.split())
 
     file_obj = codecs.open(file_path, 'r', 'utf-8')
     disc2 = json.load(file_obj)
     file_obj.close()
 
     return disc2
-

@@ -18,6 +18,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import codecs
 import os.path
 
@@ -41,9 +44,9 @@ class ConfigStore(dict):
 
     @staticmethod
     def _update_real(item, data):
-        for key, value in data.iteritems():
+        for key, value in data.items():
             if isinstance(value, dict):
-                if not item.has_key(key) or not isinstance(item[key], dict):
+                if key not in item or not isinstance(item[key], dict):
                     item[key] = {}
                 Config._update_real(item[key], value)
             else:
@@ -55,10 +58,10 @@ class ConfigStore(dict):
             with codecs.open(filepath, 'r', 'utf-8') as f:
                 data = yaml.load(f, Loader=yamlLoader)
         except Exception:
-            print "[warning] config: file '%s' could not be loaded" % (filepath)
+            print("[warning] config: file '%s' could not be loaded" % (filepath))
 
         return data
-   
+
 class Config(ConfigStore):
     def load(self, filepath=None):
         file_list = [
@@ -85,4 +88,3 @@ class Profile(ConfigStore):
         ]
 
         self._load_file_list(file_list)
-

@@ -18,6 +18,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import sys
 import os
 import codecs
@@ -41,15 +44,15 @@ class M3U:
         try:
             file_obj = codecs.open(self.file_path, 'r+', 'UTF-8')
         except IOError:
-            print "[warning] hasher: cannot load file (%s)" % (self.file_path)
+            print("[warning] hasher: cannot load file (%s)" % (self.file_path))
             return False
 
         state = 0
         for line in file_obj:
-            line = line[:-1] 
+            line = line[:-1]
             if state == 0:
                 if line != u'#EXTM3U':
-                    print '[error] file isn\'t a valid playlist (%s)' % self.file_path
+                    print('[error] file isn\'t a valid playlist (%s)' % self.file_path)
                     file_obj.close()
                     sys.exit(1)
                 state = state + 1
@@ -75,4 +78,3 @@ class M3U:
             file_obj.write(u'%s\n' % file_name)
         #save
         file_obj.close()
-

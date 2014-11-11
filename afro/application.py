@@ -18,6 +18,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import os
 import argparse
 import datetime
@@ -33,23 +36,23 @@ class Application:
     def disc_info(self, args):
         disc = _read_disc()
 
-        print 'id:         ', disc.id
-        print 'freedb_id:  ', disc.freedb_id
-        print 'tracks:     ', len(disc.tracks)
-        print 'length:     ', datetime.timedelta(seconds=disc.seconds)
+        print('id:         ', disc.id)
+        print('freedb_id:  ', disc.freedb_id)
+        print('tracks:     ', len(disc.tracks))
+        print('length:     ', datetime.timedelta(seconds=disc.seconds))
         if args.verbose:
-            print 'sectors:    ', disc.sectors
-        print 'submission: ', disc.submission_url
+            print('sectors:    ', disc.sectors)
+        print('submission: ', disc.submission_url)
 
         if args.verbose:
             print
             for track in disc.tracks:
-                print '%02d - %s (offset: %d, sectors: %d)' % (
+                print('%02d - %s (offset: %d, sectors: %d)' % (
                     track.number,
                     datetime.timedelta(seconds=track.seconds),
                     track.offset,
                     track.sectors,
-                )
+                ))
 
 
     def list(self, args):
@@ -57,20 +60,20 @@ class Application:
         infos = disc_info()
         for disc in infos:
             num = num + 1
-            disc['num'] = num 
-            print '%(num)d - %(artist)s - %(title)s - %(date)s - %(country)s' % disc 
+            disc['num'] = num
+            print('%(num)d - %(artist)s - %(title)s - %(date)s - %(country)s' % disc)
         if len(infos) < 1:
-            print '[warning] no info found in the MusicBrainz database.'
-            print 'Consider adding it via: %s' % disc_sumission_url()
+            print('[warning] no info found in the MusicBrainz database.')
+            print('Consider adding it via: %s' % disc_sumission_url())
 
     def info(self, args):
         infos = disc_info()
         info = infos[args.num - 1]
 
         for track in info['tracks']:
-            print '%(tracknumber)s - %(title)s - %(duration)s' % track
-        
-        
+            print('%(tracknumber)s - %(title)s - %(duration)s' % track)
+
+
     def rip(self, args):
         # read config
         config = Config()
@@ -97,13 +100,13 @@ class Application:
         formater = Formater(profile)
 
         # prepare folder
-        folder_name = formater.format('folder', disc) 
+        folder_name = formater.format('folder', disc)
         folder = os.path.join(config['output']['basedir'], folder_name)
 
         try:
             os.makedirs(folder)
         except OSError:
-            print "[warning] directory already exists or permission denied"
+            print("[warning] directory already exists or permission denied")
 
         #metafiles
         ff = formater.format('metafiles', disc)
@@ -124,16 +127,16 @@ class Application:
 
         #track jobs.
         for track in disc['tracks']:
-            track_name = formater.format(track_formater, disc, track) 
+            track_name = formater.format(track_formater, disc, track)
             track_path = u'%s/%s' % (folder, track_name)
             track_ext = profile['tools']['encoder']['extension']
             track_out = u'%s.%s' % (track_path, track_ext)
             track_wav = u'%s.wav' % (track_path)
-            
+
             track_info = {
               'date': disc['date'],
-              'tracknumber': unicode(track['tracknumber']),
-              'discnumber': unicode(disc['discnumber']),
+              'tracknumber': str(track['tracknumber']),
+              'discnumber': str(disc['discnumber']),
               'title': track['title'],
               'album': disc['title'],
               'artist': disc['artist'],
@@ -141,36 +144,37 @@ class Application:
             }
 
             #rip
-            print 'rip:', track_name
+            print('rip:', track_name)
             track_rip(track['tracknumber'], track_wav, profile['tools']['ripper'], config['logging'])
 
             #encode
-            print 'encode:', track_name
+            print('encode:', track_name)
             track_enc(track_wav, track_out, profile['tools']['encoder'], config['logging'])
-        
+
             #tags
-            print 'tag:', track_name
+            print('tag:', track_name)
             track_tag(track_out, track_info)
-    
+
             #get the real track length
             track_duration = track_length(track_out)
-       
+
             #perform hash on the file
             hasher.perform(u'%s.%s' % (track_name, track_ext))
-        
+
             #playlist
-            m3u.append(u'%s.%s' % (track_name, track_ext), track['title'], track_duration) 
+            m3u.append(u'%s.%s' % (track_name, track_ext), track['title'], track_duration)
 
         #save hash
         hasher.save()
-    
+
         #save playlist
         m3u.save()
 
     def main(self):
         # args parser
         parser = argparse.ArgumentParser(description="Another Free Ripping Orchestra")
-        subparsers = parser.add_subparsers(title="commands", description="valid command")
+        subparsers = parser.add_subparsers(title="commands", description="valid command", dest='command')
+        subparsers.required = True
 
         parser_disc_info = subparsers.add_parser('disc_info')
         parser_disc_info.add_argument('--verbose', '-v', action="store_true")
@@ -199,5 +203,3 @@ class Application:
 def main():
     app = Application()
     app.main()
-
- 

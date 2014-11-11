@@ -18,6 +18,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import string
 
 class AbstractTransformer:
@@ -40,7 +43,7 @@ class CapwordsTransformer(AbstractTransformer):
 
 class ReplaceListTransformer(AbstractTransformer):
     def transform(self, text):
-        for replace_from, replace_to in self.config['transformer']['replace_list'].iteritems():
+        for replace_from, replace_to in self.config['transformer']['replace_list'].items():
             text = text.replace(replace_from, replace_to)
         return text
 
@@ -67,7 +70,7 @@ class Formater:
     def __init__(self, config):
         self.config = config
         self._inst = {}
-        for name, cls in Formater.__class.iteritems():
+        for name, cls in Formater.__class.items():
             self._inst[name] = cls(config)
 
     def prepare_data(self, disc, track=None):
@@ -85,15 +88,8 @@ class Formater:
 
         return data
 
-    def order_cmp(self, f1, f2):
-        order = self.config['formater_order']
-
-        if order.has_key(f1) and order.has_key(f2):
-            return cmp(order[f1], order[f2])
-        elif order.has_key(f1):
-            return 1
-        else:
-            return -1 
+    def transformer_order(self, transformer):
+        return self.config['formater_order'][transformer]
 
     def format(self, name, disc, track=None):
         data = self.prepare_data(disc, track)
@@ -102,9 +98,8 @@ class Formater:
             # ignore non unicode data
             if not isinstance(text, int):
                 transformer_list = self.config['formater'][name]['transformer']
-                for transformer in sorted(transformer_list, self.order_cmp):
+                for transformer in sorted(transformer_list, key=self.transformer_order):
                     text = self._inst[transformer].transform(text)
             data[key] = text
 
         return self.config['formater'][name]['format'] % data
-
