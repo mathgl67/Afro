@@ -18,8 +18,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
+from __future__ import print_function
+from __future__ import unicode_literals
 
 import codecs
 import os.path
@@ -44,7 +44,7 @@ class ConfigStore(dict):
 
     @staticmethod
     def _update_real(item, data):
-        for key, value in list(data.items()):
+        for key, value in data.items():
             if isinstance(value, dict):
                 if key not in item or not isinstance(item[key], dict):
                     item[key] = {}
@@ -65,8 +65,8 @@ class ConfigStore(dict):
 class Config(ConfigStore):
     def load(self, filepath=None):
         file_list = [
-            os.path.join(os.path.dirname(__file__), 'config.default.yml'),
-            os.path.expanduser(os.path.join('~', '.config', 'afro', 'config.yml')),
+            os.path.join(os.path.dirname(__file__), u'config.default.yml'),
+            os.path.expanduser(os.path.join(u'~', u'.config', u'afro', u'config.yml')),
         ]
 
         if (filepath):
@@ -82,9 +82,9 @@ class Config(ConfigStore):
 class Profile(ConfigStore):
     def load(self, name):
         file_list = [
-            os.path.join(os.path.dirname(__file__), 'profiles', 'default.yml'),
-            os.path.join(os.path.dirname(__file__), 'profiles', '%s.yml' % name),
-            os.path.expanduser(os.path.join('~', '.config', 'afro', 'profiles', '%s.yml' % name)),
+            os.path.join(os.path.dirname(__file__), u'profiles', u'default.yml'),
+            os.path.join(os.path.dirname(__file__), u'profiles', u'%s.yml' % name),
+            os.path.expanduser(os.path.join(u'~', u'.config', u'afro', u'profiles', u'%s.yml' % name)),
         ]
 
         self._load_file_list(file_list)

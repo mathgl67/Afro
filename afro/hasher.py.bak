@@ -18,8 +18,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
+from __future__ import print_function
+from __future__ import unicode_literals
 
 import codecs
 import os
@@ -95,7 +95,7 @@ class SFV(AbstractHasher):
         self.results[m.group(1)] = m.group(2)
 
     def save_write_result(self, file_obj, result):
-        file_obj.write('%(file_name)s %(file_hash)s\n' % (result))
+        file_obj.write(u'%(file_name)s %(file_hash)s\n' % (result))
 
 class Shasum(AbstractHasher):
     def set_config(self, config):
@@ -116,7 +116,7 @@ class Shasum(AbstractHasher):
 
     def save_write_result(self, file_obj, result):
         #must have two space as separator
-        file_obj.write('%(file_hash)s  %(file_name)s\n' % result)
+        file_obj.write(u'%(file_hash)s  %(file_name)s\n' % result)
 
 
 class Hasher:

@@ -18,8 +18,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
+from __future__ import print_function
+from __future__ import unicode_literals
 
 import sys
 import os
@@ -29,7 +29,7 @@ import re
 class M3U:
     def __init__(self, path, name, config):
         self.config = config['playlist']['m3u']
-        self.file_path = '%s.%s' % (
+        self.file_path = u'%s.%s' % (
             os.path.join(path, name),
             self.config['extension'],
         )
@@ -51,7 +51,7 @@ class M3U:
         for line in file_obj:
             line = line[:-1]
             if state == 0:
-                if line != '#EXTM3U':
+                if line != u'#EXTM3U':
                     print('[error] file isn\'t a valid playlist (%s)' % self.file_path)
                     file_obj.close()
                     sys.exit(1)
@@ -71,10 +71,10 @@ class M3U:
     def save(self):
         file_obj = codecs.open(self.file_path, 'w+', 'UTF-8')
         #header
-        file_obj.write('#EXTM3U\n')
+        file_obj.write(u'#EXTM3U\n')
         #tracks
         for file_name, file_title, file_duration in self.tracks:
-            file_obj.write('#EXTINF:%d,%s\n' % (file_duration, file_title))
-            file_obj.write('%s\n' % file_name)
+            file_obj.write(u'#EXTINF:%d,%s\n' % (file_duration, file_title))
+            file_obj.write(u'%s\n' % file_name)
         #save
         file_obj.close()

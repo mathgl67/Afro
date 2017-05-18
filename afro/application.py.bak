@@ -18,8 +18,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
-
+from __future__ import print_function
+from __future__ import unicode_literals
 
 import os
 import argparse
@@ -45,7 +45,7 @@ class Application:
         print('submission: ', disc.submission_url)
 
         if args.verbose:
-            print()
+            print
             for track in disc.tracks:
                 print('%02d - %s (offset: %d, sectors: %d)' % (
                     track.number,
@@ -128,10 +128,10 @@ class Application:
         #track jobs.
         for track in disc['tracks']:
             track_name = formater.format(track_formater, disc, track)
-            track_path = '%s/%s' % (folder, track_name)
+            track_path = u'%s/%s' % (folder, track_name)
             track_ext = profile['tools']['encoder']['extension']
-            track_out = '%s.%s' % (track_path, track_ext)
-            track_wav = '%s.wav' % (track_path)
+            track_out = u'%s.%s' % (track_path, track_ext)
+            track_wav = u'%s.wav' % (track_path)
 
             track_info = {
               'date': disc['date'],
@@ -159,10 +159,10 @@ class Application:
             track_duration = track_length(track_out)
 
             #perform hash on the file
-            hasher.perform('%s.%s' % (track_name, track_ext))
+            hasher.perform(u'%s.%s' % (track_name, track_ext))
 
             #playlist
-            m3u.append('%s.%s' % (track_name, track_ext), track['title'], track_duration)
+            m3u.append(u'%s.%s' % (track_name, track_ext), track['title'], track_duration)
 
         #save hash
         hasher.save()
