@@ -1,4 +1,0 @@
-PyYAML==3.11
-discid==1.1.0
-musicbrainzngs==0.5
-mutagen==1.26
